@@ -115,7 +115,7 @@ It is a shame that we are not able to verify any of the cnn models we planned to
 
 
 # How to run
-1. Download verification.tar.gz
+1. Download [verification.tar.gz](https://virginia.box.com/s/4e3rczazkh5aw8ywz4qr2f4exi9vvc03)
 2. run: docker load < verification.tar.gz
 
 By default everything run on cuda, if cuda is not available, add "--device cpu" at the end of each command
