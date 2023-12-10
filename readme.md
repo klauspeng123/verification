@@ -109,3 +109,101 @@ Despite our effort to verify the robustenss of the CNNs, we are unable to make t
 # Conclusion
 Overall, we have verified the heart disease model both oringinal and quantized version, date fruit multiclass mlp and a image classification model on sign language. We have found that our binary classification model is not robust against small preturbation of input that is likely to occur in real life. However, the quantized model despite using less memory, is able to preserve robustness nearly as well as the original without any significant sacrifies to accuracy, making it an viable option to use if memory and computing speed is importnat in different situations. For the non-binary classification MLP, we determined that it is pretty robust against preturbation of input and hence can be considered a robust model. However, we do acknowledge the fact that the "small" change in input are values chosen by ourselves which may differ from how those value varies in real life and lead to potential different result. At last, for the sign language classification model, we found that it is not robust at all and a very small change in input can dramtically reduce the accuracy of the model. Other than the reason discussed above, the amount classes 26 is also a factor impacting the robustness since the output space will be smaller for each class.
 It is a shame that we are not able to verify any of the cnn models we planned to do as well as the fake image detection model. For next time if possible, we should consider back up verification tool in case of something similar happens. 
+
+
+
+
+
+# How to run
+1. Download verification.tar.gz
+2. run: docker load < verification.tar.gz
+
+By default everything run on cuda, if cuda is not available, add "--device cpu" at the end of each command
+
+* Model 1: 
+    Epsilon 0 - 7 for first 100 instance
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 0
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 1
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 2
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 3
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 4
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 5
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 6
+
+    docker run test python abcrown.py --config config1/test1.yaml --epsilon 7
+
+    for first instance with epsilon x, x is an non negative integer:
+
+    docker run test python abcrown.py --config config1/test1.yaml --end 1 --epsilon x
+
+
+* Model 2: 
+    Epsilon 0 - 7 for first 100 instance
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 0
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 1
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 2
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 3
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 4
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 5
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 6
+
+    docker run test python abcrown.py --config config1/test2.yaml --epsilon 7
+
+    for first instance with epsilon x:
+
+    docker run test python abcrown.py --config config1/test2.yaml --end 1 --epsilon x
+
+
+
+* Model 3: 
+    Epsilon 0 - 2 for first 100 instance
+
+    docker run test python abcrown.py --config config2/test1.yaml --epsilon 0
+
+    docker run test python abcrown.py --config config2/test1.yaml --epsilon 0.5
+
+    docker run test python abcrown.py --config config2/test1.yaml --epsilon 1
+
+    docker run test python abcrown.py --config config2/test1.yaml --epsilon 1.5
+
+    docker run test python abcrown.py --config config2/test1.yaml --epsilon 2
+
+
+
+* Model 2: 
+    Epsilon 0 - 3 for first 100 instance
+
+    docker run test python abcrown.py --config config3/test1.yaml --epsilon 0
+
+    docker run test python abcrown.py --config config3/test1.yaml --epsilon 1
+
+    docker run test python abcrown.py --config config3/test1.yaml --epsilon 2
+
+    docker run test python abcrown.py --config config3/test1.yaml --epsilon 3
+
+
+* Other CNN - Does not work:
+
+    docker run test python abcrown.py --config config/test1.yaml
+
+    docker run test python abcrown.py --config config/test2.yaml
+
+    docker run test python abcrown.py --config config/test3.yaml
+
+    docker run test python abcrown.py --config config/test4.yaml
+
+    docker run test python abcrown.py --config config/test5.yaml
